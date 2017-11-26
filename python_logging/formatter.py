@@ -28,7 +28,8 @@ class SlackFormatter(logging.Formatter):
             "attachments": [
                 {
                     "color": get_color(record.levelno),
-                    "author_name": self.name,
+                    "title": self.name,
+                    "title_link": "https://github.com/neoliberal/{}".format(self.name),
                     "text": record.getMessage(),
                     "fields": [
                         {

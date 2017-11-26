@@ -11,10 +11,10 @@ def make_slack_logger(
     ) -> logging.Logger:
     """makes new slack logger"""
     slack_logger: logging.Logger = logging.getLogger(__name__)
-    slack_logger.setLevel(logging.WARNING)
+    slack_logger.setLevel(logging.INFO)
 
     slack_handler: logging.Handler = SlackHandler(url)
-    slack_handler.setLevel(logging.WARNING)
+    slack_handler.setLevel(logging.INFO)
 
     slack_formatter: logging.Formatter = SlackFormatter(app_name) if (
         formatter is None

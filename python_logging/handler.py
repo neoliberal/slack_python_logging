@@ -16,7 +16,7 @@ class SlackHandler(logging.Handler):
         msg: str = self.format(record)
         requests.post(
             self.url,
-            json=msg,
+            data=str.encode(msg),
             headers={"Content-type": "application/json"}
         )
         return
