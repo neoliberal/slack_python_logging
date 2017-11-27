@@ -21,6 +21,6 @@ def make_slack_logger(
     ) else formatter
 
     slack_handler.setFormatter(slack_formatter)
-
     slack_logger.addHandler(slack_handler)
+
     return slack_logger
