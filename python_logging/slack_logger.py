@@ -2,8 +2,8 @@
 import logging
 from typing import Optional
 
-from formatter import SlackFormatter
-from handler import SlackHandler
+from .formatter import SlackFormatter
+from .handler import SlackHandler
 
 def make_slack_logger(
         url: str, app_name: str,
