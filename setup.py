@@ -2,7 +2,7 @@
 from setuptools import setup
 
 setup(
-    name="slackbot_python_logger",
+    name="slack_python_logging",
     version="0.1.0",
     author="Abhi Agarwal",
     author_email="abhi@neoliber.al",
