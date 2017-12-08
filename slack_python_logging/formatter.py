@@ -29,16 +29,27 @@ class SlackFormatter(logging.Formatter):
                 {
                     "color": get_color(record.levelno),
                     "title": self.name,
-                    "title_link": "https://github.com/neoliberal/{}".format(self.name),
+                    "title_link": f"https://github.com/neoliberal/{self.name}",
                     "text": record.getMessage(),
                     "fields": [
                         {
                             "title": "Level",
-                            "value": record.levelname,
+                            "value": record.levelname.title(),
                             "short": True
                         }
+                        # {
+                        #     "title": "User",
+                        #     "value": (
+                        #         f"<https://reddit.com/r/{record.user}|{record.user}>"
+                        #         if record.user else "Unknown"
+                        #     ),
+                        #     "short": True
+                        # }
                     ],
-                    "footer": "<https://github.com/neoliberal/slackbot|slackbot>",
+                    "footer": (
+                        "<https://github.com/neoliberal/slackbot_python_logging"
+                        "|slackbot_python_logging>"
+                    ),
                     "ts": int(record.created)
                 }
             ]

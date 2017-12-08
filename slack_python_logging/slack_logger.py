@@ -7,11 +7,12 @@ from typing import List
 from .formatter import SlackFormatter
 from .handler import SlackHandler
 
-def make_slack_logger(app_name: str) -> logging.Logger:
+
+def initialize(app_name: str, webhook_url=os.environ["slack_webhook_url"]) -> logging.Logger:
     """makes new slack logger"""
     slack_logger: logging.Logger = logging.getLogger(app_name)
 
-    slack_handler: logging.Handler = SlackHandler(os.environ["slack_webhook_url"])
+    slack_handler: logging.Handler = SlackHandler(webhook_url)
     slack_handler.setLevel(logging.INFO)
     slack_formatter: logging.Formatter = SlackFormatter(app_name)
     slack_handler.setFormatter(slack_formatter)
