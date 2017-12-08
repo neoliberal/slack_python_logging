@@ -10,4 +10,5 @@ setup(
     url="https://github.com/neoliberal/slack_python_logging",
     license="LICENSE",
     description="Module for logging to a Slack Channel with Webhooks",
+    python_requires='>=3',
 )
