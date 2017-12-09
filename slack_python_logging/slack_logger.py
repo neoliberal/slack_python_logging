@@ -4,6 +4,8 @@ import os
 import sys
 from typing import List
 
+from systemd.journal import JournalHandler
+
 from .formatter import SlackFormatter
 from .handler import SlackHandler
 
@@ -17,17 +19,15 @@ def initialize(app_name: str, webhook_url=os.environ["slack_webhook_url"]) -> lo
     slack_formatter: logging.Formatter = SlackFormatter(app_name)
     slack_handler.setFormatter(slack_formatter)
 
-    file_handler: logging.Handler = logging.FileHandler(
-        os.path.join(os.sep, "var", "log", app_name + ".log")
-    )
-    file_handler.setLevel(logging.DEBUG)
-    file_formatter: logging.Formatter = logging.Formatter(
+    journal_handler: logging.Handler = JournalHandler(SYSLOG_IDENTIFIER=app_name)
+    journal_handler.setLevel(logging.DEBUG)
+    journal_formatter: logging.Formatter = logging.Formatter(
         fmt='%(asctime)s %(name)-12s %(levelname)-8s %(message)s'
     )
-    file_handler.setFormatter(file_formatter)
+    journal_handler.setFormatter(journal_formatter)
 
     slack_logger.addHandler(slack_handler)
-    slack_logger.addHandler(file_handler)
+    slack_logger.addHandler(journal_handler)
 
     from traceback import format_exception
     from types import TracebackType
