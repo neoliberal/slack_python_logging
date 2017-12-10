@@ -9,7 +9,7 @@ with open("requirements.txt") as file:
 setup(
     name="slack_python_logging",
     description="Module for logging to a Slack Channel with Webhooks",
-    version="1.1.4",
+    version="1.2.0",
     python_requires='>=3',
     install_requires=requirements,
     packages=find_packages(),
@@ -29,5 +29,5 @@ setup(
         "Programming Language :: Python :: Implementation :: CPython",
         "Topic :: Software Development :: Libraries :: Python Modules"
     ],
-    keywords="reddit slack python_logging",
+    keywords=["reddit", "slack python_logging"]
 )

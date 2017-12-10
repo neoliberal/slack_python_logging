@@ -22,7 +22,7 @@ def initialize(app_name: str, webhook_url=os.environ["slack_webhook_url"]) -> lo
     journal_handler: logging.Handler = journal.JournalHandler(SYSLOG_IDENTIFIER=app_name)
     journal_handler.setLevel(logging.DEBUG)
     journal_formatter: logging.Formatter = logging.Formatter(
-        fmt='%(asctime)s %(name)-12s %(levelname)-8s %(message)s'
+        fmt='%(asctime)s %(levelname)-8s %(lineno)-4d %(message)s'
     )
     journal_handler.setFormatter(journal_formatter)
 

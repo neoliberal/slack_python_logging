@@ -33,22 +33,29 @@ class SlackFormatter(logging.Formatter):
                     "text": record.getMessage(),
                     "fields": [
                         {
+                            "title": "Module",
+                            "value": record.module,
+                            "short": True
+                        },
+                        {
                             "title": "Level",
                             "value": record.levelname.title(),
                             "short": True
+                        },
+                        {
+                            "title": "Function",
+                            "value": record.funcName,
+                            "short": True
+                        },
+                        {
+                            "title": "Line Number",
+                            "value": record.lineno,
+                            "short": True
                         }
-                        # {
-                        #     "title": "User",
-                        #     "value": (
-                        #         f"<https://reddit.com/r/{record.user}|{record.user}>"
-                        #         if record.user else "Unknown"
-                        #     ),
-                        #     "short": True
-                        # }
                     ],
                     "footer": (
-                        "<https://github.com/neoliberal/slackbot_python_logging"
-                        "|slackbot_python_logging>"
+                        "<https://github.com/neoliberal/slack_python_logging"
+                        "|slack_python_logging>"
                     ),
                     "ts": int(record.created)
                 }
