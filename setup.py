@@ -13,7 +13,6 @@ setup(
     python_requires='>=3',
     install_requires=requirements,
     packages=find_packages(),
-    package_dir={"": "slack_python_logging"},
     # metadata
     author="Abhi Agarwal",
     author_email="abhi@neoliber.al",
@@ -22,7 +21,7 @@ setup(
     classifiers=[
         "Development Status :: 4 - Beta",
         "Environment :: Console",
-        "Intended Audience :: Developers"
+        "Intended Audience :: Developers",
         "License :: OSI Approved :: MIT License",
         "Natural Language :: English",
         "Operating System :: POSIX :: Linux",
