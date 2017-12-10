@@ -1,6 +1,6 @@
 """formats data to be pushable"""
 import logging
-from typing import Dict, Any, Optional
+from typing import Dict, Any, Optional, Tuple
 
 class SlackFormatter(logging.Formatter):
     """generic formatter"""
@@ -11,6 +11,12 @@ class SlackFormatter(logging.Formatter):
 
     def format(self, record: logging.LogRecord) -> str:
         import json
+
+        def get_traceback() -> str:
+            """returns traceback"""
+            from traceback import format_exception
+            exc_info: Tuple = record.exc_info
+            return "".join(format_exception(*exc_info)) if exc_info else "None"
 
         def get_color(level: int) -> Optional[str]:
             """returns appropriate color based on logging level"""
@@ -51,6 +57,11 @@ class SlackFormatter(logging.Formatter):
                             "title": "Line Number",
                             "value": record.lineno,
                             "short": True
+                        },
+                        {
+                            "title": "Traceback",
+                            "value": get_traceback(),
+                            "short": False
                         }
                     ],
                     "footer": (

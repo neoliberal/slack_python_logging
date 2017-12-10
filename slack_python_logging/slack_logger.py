@@ -2,7 +2,6 @@
 import logging
 import os
 import sys
-from typing import List
 
 from systemd import journal
 
@@ -29,7 +28,6 @@ def initialize(app_name: str, webhook_url=os.environ["slack_webhook_url"]) -> lo
     slack_logger.addHandler(slack_handler)
     slack_logger.addHandler(journal_handler)
 
-    from traceback import format_exception
     from types import TracebackType
     from typing import Type
     def log_excepthook(
@@ -38,8 +36,19 @@ def initialize(app_name: str, webhook_url=os.environ["slack_webhook_url"]) -> lo
             traceback: TracebackType
         ) -> None:
         """override excepthook to log"""
-        fmt_trace: List[str] = format_exception(type_, value, traceback)
-        slack_logger.critical("".join(fmt_trace))
+        slack_logger.critical(
+            "Critical Exception caught, exiting.",
+            exc_info=(type_, value, traceback)
+        )
+        return
+
+
+    import atexit
+    # shut it, pylint: disable=W0612
+    @atexit.register
+    def graceful_exit() -> None:
+        """outputs if graceful exit"""
+        slack_logger.info("Exited gracefully")
         return
 
     sys.excepthook = log_excepthook
