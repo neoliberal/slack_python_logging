@@ -1,1 +1,1 @@
-python-systemd
+systemd-python
