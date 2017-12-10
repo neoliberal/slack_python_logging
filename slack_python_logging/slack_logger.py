@@ -4,7 +4,7 @@ import os
 import sys
 from typing import List
 
-from systemd.journal import JournalHandler
+from systemd import journal
 
 from .formatter import SlackFormatter
 from .handler import SlackHandler
@@ -19,7 +19,7 @@ def initialize(app_name: str, webhook_url=os.environ["slack_webhook_url"]) -> lo
     slack_formatter: logging.Formatter = SlackFormatter(app_name)
     slack_handler.setFormatter(slack_formatter)
 
-    journal_handler: logging.Handler = JournalHandler(SYSLOG_IDENTIFIER=app_name)
+    journal_handler: logging.Handler = journal.JournalHandler(SYSLOG_IDENTIFIER=app_name)
     journal_handler.setLevel(logging.DEBUG)
     journal_formatter: logging.Formatter = logging.Formatter(
         fmt='%(asctime)s %(name)-12s %(levelname)-8s %(message)s'
