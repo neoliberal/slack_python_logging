@@ -42,15 +42,6 @@ def initialize(app_name: str, webhook_url=os.environ["slack_webhook_url"]) -> lo
         )
         return
 
-
-    import atexit
-    # shut it, pylint: disable=W0612
-    @atexit.register
-    def graceful_exit() -> None:
-        """outputs if graceful exit"""
-        slack_logger.info("Exited gracefully")
-        return
-
     sys.excepthook = log_excepthook
 
     slack_logger.setLevel(logging.DEBUG)
