@@ -13,7 +13,7 @@ def initialize(app_name: str, webhook_url=os.environ["slack_webhook_url"]) -> lo
     slack_logger: logging.Logger = logging.getLogger(app_name)
 
     slack_handler: logging.Handler = SlackHandler(webhook_url)
-    slack_handler.setLevel(logging.INFO)
+    slack_handler.setLevel(logging.ERROR)
     slack_formatter: logging.Formatter = SlackFormatter(app_name)
     slack_handler.setFormatter(slack_formatter)
     slack_logger.addHandler(slack_handler)
