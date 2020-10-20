@@ -9,13 +9,13 @@ with open("requirements.txt") as file:
 setup(
     name="slack_python_logging",
     description="Module for logging to a Slack Channel with Webhooks",
-    version="1.4.0",
+    version="2.0.0",
     python_requires='>=3',
     install_requires=requirements,
     packages=find_packages(),
     # metadata
-    author="Abhi Agarwal",
-    author_email="abhi@neoliber.al",
+    author="jenbanim",
+    author_email="jenbanim@gmail.com",
     url="https://github.com/neoliberal/slack_python_logging",
     license="MIT",
     classifiers=[
