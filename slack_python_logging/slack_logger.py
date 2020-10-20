@@ -13,6 +13,7 @@ def initialize(app_name: str) -> logging.Logger:
     """makes new slack logger"""
     # The logger object to which we will add stream/systemd/slack handlers
     slack_logger: logging.Logger = logging.getLogger(app_name)
+    slack_logger.setLevel(logging.DEBUG)
     formatter: logging.Formatter = logging.Formatter(
         fmt='%(asctime)s %(levelname)-8s %(lineno)-4s %(message)s'
     )
@@ -33,7 +34,7 @@ def initialize(app_name: str) -> logging.Logger:
         slack_logger.addHandler(file_handler)
     else:
         journal_handler: logging.Handler = journal.JournalHandler(SYSLOG_IDENTIFIER=app_name)
-        journal_handler.setLevel(logging.DEBUG)
+        journal_handler.setLevel(logging.INFO)
         journal_handler.setFormatter(formatter)
         slack_logger.addHandler(journal_handler)
 
