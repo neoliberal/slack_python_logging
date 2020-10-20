@@ -2,8 +2,6 @@
 import logging
 import os
 import sys
-import traceback
-
 
 from .formatter import SlackFormatter
 from .handler import SlackHandler
