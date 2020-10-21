@@ -9,9 +9,8 @@ from .handler import SlackHandler
 
 def initialize(app_name: str) -> logging.Logger:
     """makes new slack logger"""
-    # The logger object to which we will add stream/systemd/slack handlers
+    # The logger object to which we will add stream/slack handlers
     slack_logger: logging.Logger = logging.getLogger(app_name)
-    slack_logger.setLevel(logging.DEBUG)
     formatter: logging.Formatter = logging.Formatter(
         fmt='%(asctime)s %(levelname)-8s %(lineno)-4s %(message)s'
     )
@@ -21,20 +20,6 @@ def initialize(app_name: str) -> logging.Logger:
     stream_handler.setLevel(logging.DEBUG)
     stream_handler.setFormatter(formatter)
     slack_logger.addHandler(stream_handler)
-
-    # Attempt to log to systemd, otherwise log to a file
-    try:
-        from systemd import journal
-    except ImportError:
-        file_handler: logging.Handler = logging.FileHandler(f"{app_name}.log")
-        file_handler.setLevel(logging.INFO)
-        file_handler.setFormatter(formatter)
-        slack_logger.addHandler(file_handler)
-    else:
-        journal_handler: logging.Handler = journal.JournalHandler(SYSLOG_IDENTIFIER=app_name)
-        journal_handler.setLevel(logging.INFO)
-        journal_handler.setFormatter(formatter)
-        slack_logger.addHandler(journal_handler)
 
     # Catch and log all exceptions
     from types import TracebackType
@@ -62,6 +47,5 @@ def initialize(app_name: str) -> logging.Logger:
         slack_logger.addHandler(slack_handler)
     except KeyError:
         slack_logger.warning("No Slack webhook -- not logging to slack")
-
 
     return slack_logger
