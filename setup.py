@@ -1,17 +1,12 @@
 """setup"""
-from typing import List
 
 from setuptools import setup, find_packages
 
-with open("requirements.txt") as file:
-    requirements: List[str] = file.read().splitlines()
-
 setup(
     name="slack_python_logging",
-    description="Module for logging to a Slack Channel with Webhooks",
-    version="2.1.0",
-    python_requires='>=3',
-    install_requires=requirements,
+    description="Module for logging to a Slack channel with webhooks",
+    version="2.2.0",
+    python_requires='>=3.6',
     packages=find_packages(),
     # metadata
     author="jenbanim",
