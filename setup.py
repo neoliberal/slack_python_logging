@@ -5,7 +5,7 @@ from setuptools import setup, find_packages
 setup(
     name="slack_python_logging",
     description="Module for logging to a Slack channel with webhooks",
-    version="2.2.0",
+    version="3.0.0",
     python_requires='>=3.6',
     packages=find_packages(),
     # metadata

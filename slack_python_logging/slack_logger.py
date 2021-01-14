@@ -8,7 +8,7 @@ from .formatter import SlackFormatter
 from .handler import SlackHandler
 
 
-def initialize(
+def getLogger(
         app_name: str,
         stream_loglevel: Union[str, int] = "WARNING",
         slack_loglevel: Union[str, int] = "CRITICAL",
@@ -27,22 +27,6 @@ def initialize(
     stream_handler.setLevel(stream_loglevel)
     stream_handler.setFormatter(formatter)
     slack_logger.addHandler(stream_handler)
-
-    # Catch and log all exceptions
-    from types import TracebackType
-    from typing import Type
-    def log_excepthook(
-            type_: Type[BaseException],
-            value: BaseException,
-            tb: TracebackType
-        ) -> None:
-        """override excepthook to log"""
-        slack_logger.critical(
-            "Critical Exception caught, exiting.",
-            exc_info=(type_, value, tb)
-        )
-        return
-    sys.excepthook = log_excepthook
 
     # Attempt to log to Slack, but don't if there isn't a webhook url
     try:
