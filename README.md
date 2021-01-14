@@ -19,9 +19,9 @@ Or you can clone the repo, in which case I assume you know what you're doing
 You must have the `SLACK_WEBHOOK_URL` environment variable set before initializing
 
 ```python
-from slack_python_logging import slack_logger
-    
-logger = slack_logger.initialize(
+import slack_python_logging
+
+logger = slack_python_logging.getLogger(
     app_name = "My App", # Appears in slack messages
     stream_loglevel = "DEBUG" # What gets printed to stdout
     slack_loglevel = "CRITICAL" # What gets sent to Slack

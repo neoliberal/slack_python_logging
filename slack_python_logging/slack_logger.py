@@ -8,7 +8,7 @@ from .formatter import SlackFormatter
 from .handler import SlackHandler
 
 
-def initialize(
+def getLogger(
         app_name: str,
         stream_loglevel: Union[str, int] = "WARNING",
         slack_loglevel: Union[str, int] = "CRITICAL",
